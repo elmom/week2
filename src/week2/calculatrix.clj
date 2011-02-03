@@ -3,8 +3,8 @@
 (defn read-words []
   "Read a line and split it into words. Returns the words as a vector
   of strings."
-  (let [line (read-line)]
-    (vec (.split line " "))))
+  (if-let [line (read-line)]
+    (vec (.split line "\\s+"))))
 
 (defn string->number [string]
   (try
@@ -19,7 +19,8 @@
     (when (and first-operand second-operand)
       (case command
         "+" (+ first-operand second-operand)
-        "*" (* first-operand second-operand)))))
+        "*" (* first-operand second-operand)
+        nil))))
 
 (defn main []
   "This is the driver loop of the calculator. It loops by calling itself recursively."

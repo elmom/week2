@@ -44,4 +44,7 @@
 (defn add-at [matrix a b]
   ":(")
 
+(defn monotonic-prefix [s]
+  ":(")
+
 ;(
