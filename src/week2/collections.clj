@@ -5,14 +5,14 @@
 
 (defn halve [collection]
   (let [middle (/ (count collection) 2)]
-    [(take middle collection), (drop middle collection)]))
+    (split-at middle collection))
 
 (defn first-five-positives [a-seq]
   (take 5 (take-while pos? a-seq)))
 
 (defn snip [a-seq]
   (let [not-snip? #(not (= % :snip))]
-    (split-with not-snip? a-seq)))
+    (vector (take-while not-snip? a-seq) (rest (drop-while not-snip a-seq)))))
 
 (defn monotonic? [a-seq]
   ":(")
