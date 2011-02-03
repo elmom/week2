@@ -8,7 +8,7 @@
     (split-at middle collection)))
 
 (defn first-five-positives [a-seq]
-  (take 5 (take-while pos? a-seq)))
+  (take 5 (filter pos? a-seq)))
 
 (defn snip [a-seq]
   (let [not-snip? #(not (= % :snip))]
@@ -22,10 +22,12 @@
   (or (apply <= a-seq) (apply >= a-seq)))
 
 (defn transpose [matrix]
-  ":(")
+  (for [row matrix]
+    (for [column row]
+      column)))
 
 (defn exterminate [a-map]
-  (hash-map (filter #(apply < %) a-map)))
+  (filter #(apply >= %) a-map))
 
 (defn take-3 [a-seq]
  (let [[fst snd trd] a-seq]
@@ -45,13 +47,18 @@
     key))
 
 (defn who-wrote [books index]
-  ":(")
+  (get-in books [index :author]))
 
 (defn author-birth-years [books]
-  ":(")
+  (filter identity (map #(get-in % [:author :birth-year]) books)))
 
 (defn add-at [matrix a b]
-  ":(")
+  (let [[a1 a2] a
+        [b1 b2] b]
+    (update-in matrix [a1 a2] #(+ % (get-in matrix [b1 b2])))))
+
+(defn consecutives [s]
+  (map list s (rest s)))
 
 (defn monotonic-prefix [s]
-  ":(")
+  (map first (take-while #(apply <= %) (consecutives s))))
